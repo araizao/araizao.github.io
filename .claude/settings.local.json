@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/oscararaiza/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/f845221d-66da-46ba-a291-b67c5285e966/0d0b2b2e-1a93-4246-b608-e1c0623d8231/skills/docx/**)",
+      "Bash(pandoc --track-changes=all \"/Users/oscararaiza/Documents/resumes/araiza_resume_2026_rewrite_1.docx\" -o /tmp/resume_extract.md)",
+      "Read(//tmp/**)",
+      "Bash(python scripts/office/unpack.py \"/Users/oscararaiza/Documents/resumes/araiza_resume_2026_rewrite_1.docx\" /tmp/resume_unpacked/)",
+      "Bash(python3 -c ' *)",
+      "Bash(git init *)",
+      "Bash(git checkout *)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git config *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(ssh-keyscan github.com)",
+      "Bash(gh auth *)",
+      "Bash(ssh-add ~/.ssh/id_ed25519)",
+      "Bash(ssh -T git@github.com)",
+      "Bash(git fetch *)",
+      "Bash(git merge *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
