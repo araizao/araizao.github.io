@@ -228,6 +228,81 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* ── AURORA (pure CSS — compositor thread, zero scroll jank) ── */
+    .aurora {
+      position: fixed;
+      inset: -30%;          /* oversized so blobs never clip at edges */
+      z-index: 0;
+      pointer-events: none;
+    }
+    .a {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+    .a1 {
+      width: 75%; height: 65%;
+      top: 5%; left: 0%;
+      background: radial-gradient(ellipse, rgba(200,155,70,0.32) 0%, transparent 68%);
+      filter: blur(88px);
+      animation: a1 22s;
+    }
+    .a2 {
+      width: 62%; height: 58%;
+      top: 28%; right: 0%;
+      background: radial-gradient(ellipse, rgba(175,82,22,0.26) 0%, transparent 68%);
+      filter: blur(96px);
+      animation: a2 28s;
+    }
+    .a3 {
+      width: 58%; height: 55%;
+      bottom: 5%; left: 8%;
+      background: radial-gradient(ellipse, rgba(15,78,195,0.26) 0%, transparent 68%);
+      filter: blur(100px);
+      animation: a3 19s;
+    }
+    .a4 {
+      width: 48%; height: 44%;
+      top: 42%; left: 35%;
+      background: radial-gradient(ellipse, rgba(210,162,48,0.20) 0%, transparent 68%);
+      filter: blur(110px);
+      animation: a4 24s;
+    }
+    .a5 {
+      width: 42%; height: 40%;
+      bottom: 12%; right: 8%;
+      background: radial-gradient(ellipse, rgba(88,38,185,0.20) 0%, transparent 68%);
+      filter: blur(104px);
+      animation: a5 31s;
+    }
+
+    @keyframes a1 {
+      from { transform: translate(0%,   0%)   scale(1);    }
+      to   { transform: translate(9%,   13%)  scale(1.12); }
+    }
+    @keyframes a2 {
+      from { transform: translate(0%,   0%)   scale(1);    }
+      to   { transform: translate(-11%, 8%)   scale(0.92); }
+    }
+    @keyframes a3 {
+      from { transform: translate(0%,   0%)   scale(1);    }
+      to   { transform: translate(12%,  -10%) scale(1.08); }
+    }
+    @keyframes a4 {
+      from { transform: translate(0%,   0%)   scale(1);    }
+      to   { transform: translate(-8%,  11%)  scale(1.15); }
+    }
+    @keyframes a5 {
+      from { transform: translate(0%,   0%)   scale(1);    }
+      to   { transform: translate(10%,  -9%)  scale(0.88); }
+    }
+
+    /* ensure content sits above aurora */
+    nav, section, footer { position: relative; z-index: 1; }
+
     /* ── SECTIONS ── */
     section { padding: 110px var(--pad); }
     section:nth-child(even) { background: var(--bg2); }
@@ -568,6 +643,15 @@
   </style>
 </head>
 <body>
+
+<!-- AURORA BACKGROUND -->
+<div class="aurora">
+  <div class="a a1"></div>
+  <div class="a a2"></div>
+  <div class="a a3"></div>
+  <div class="a a4"></div>
+  <div class="a a5"></div>
+</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -981,6 +1065,7 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
 
   // ── Project card tilt ──
   document.querySelectorAll('.proj-card').forEach(card => {
